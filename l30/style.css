@@ -38,3 +38,23 @@ button[type="submit"] {
     float: left;
     text-align: left;
 }
+
+#delete-button{
+    background-color: #ee035c;
+    color: white;
+    padding: 5px 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    float: right;
+    vertical-align: middle;
+}
+
+li{
+    width: 400px;
+    border-bottom: 1px solid grey;
+    padding-top:20px;
+    padding-bottom:20px;
+}

@@ -20,24 +20,75 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script>
-            function addTodo() {
-            var input = document.getElementById("todo-input").value;
 
-            $.ajax({
-                url: "function.php",
-                type: "POST",
-                data: {"add":"add",
-                    todo: input},
-                success: function(response) {
-                    document.getElementById("todo-list").innerHTML = response;
-                }
-            });
+            function getList()
+            {
+                $.ajax({
+                    url: "function.php",
+                    type: "GET",
+                    data: {
+                        "getList":true
+                    },
+                    success: function(response){
+                        $("#todo-list").html(response);
+                    }
+                });
             }
 
-            var submitButton = document.getElementById("add-todo-form").addEventListener("submit", function(e) {
-            e.preventDefault();
-            addTodo();
+            function addTodo()
+            {
+                var input = $("#todo-input").val();
+
+                $.ajax({
+                    url: "function.php",
+                    type: "POST",
+                    data: {"add":"add",
+                        todo: input},
+                    success: function(response) {
+                        getList();
+                    }
+                });
+            }
+
+            $('#add-todo-form').on('submit', function(e) {
+                e.preventDefault();
+                addTodo();
             });
+
+
+            function deleteItem(id)
+            {
+
+                $.ajax({
+                    url: "function.php",
+                    type: "POST",
+                    data: {
+                        "delete":"1",
+                        id: id
+                    },
+                    success: function(response) {
+                        getList();
+                    }
+                });
+            }
+
+            function updateItem(id)
+            {
+                var todo = $("#"+id).val();
+                $.ajax({
+                    url: "function.php",
+                    type: "POST",
+                    data: {
+                        "update":"1",
+                        id: id,
+                        text: todo
+                    },
+                    success: function(response) {
+                        getList();
+                    }
+                });
+            }
+
         </script>
     </body>
 </html>
