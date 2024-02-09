@@ -149,10 +149,10 @@ $username = "root";
 $password = "";
 $db="impact_test";*/
 
-    $servername = "sql11.freemysqlhosting.net";
-    $username = "sql11681645";
+    $servername = "db4free.net";
+    $username = "impact";
     $password = "1cIGrYFGNB";
-    $db="sql11681645";
+    $db="impact";
 
 
 
