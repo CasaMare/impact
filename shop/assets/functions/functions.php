@@ -54,12 +54,13 @@ function get_products()
         $prd_title = $row_brands["prd_title"];
         $prd_desc = $row_brands["prd_desc"];
         $prd_price = $row_brands["prd_price"];
+        $prd_img = $row_brands["prd_img"];
 
         echo
         <<<EOT
             <div class="col-4 mb-3">
                             <div class="card" style="width: 18rem;">
-                                <img style="width:200px;" src="assets/images/xiaomi.png" class="card-img-top align-self-center" alt="...">
+                                <img style="width:200px;" src="assets/images/$prd_img" class="card-img-top align-self-center" alt="...">
                                 <div class="card-body d-flex flex-column" style="height: 300px;">
                                     <h5 class="card-title">$prd_title</h5>
                                     <p class="card-text">$prd_desc</p>
