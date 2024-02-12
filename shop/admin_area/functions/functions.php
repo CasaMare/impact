@@ -6,6 +6,26 @@ if(isset($_POST['addProduct'])){
     addProduct();
 }
 
+
+if(isset($_POST['editProduct'])){
+    editProduct();
+}
+
+function editProduct()
+{
+    $title = htmlspecialchars($_POST['title']);
+    $description = htmlspecialchars($_POST['description']);
+    $price = htmlspecialchars($_POST['price']);
+    $keywords = htmlspecialchars($_POST['keywords']);
+    $id = htmlspecialchars($_POST['prd_id']);
+    $sql = "UPDATE products set prd_title='$title' where prd_id=$id";
+
+    if(!db_query($sql, 'update')){
+        header('HTTP/1.1 500 Internal Server Error');
+    }
+}
+
+
 function addProduct()
 {
     $title = htmlspecialchars($_POST['title']);
