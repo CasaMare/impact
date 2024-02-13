@@ -9,7 +9,7 @@
             <div class="col-9">
                 <div class="container">
                     <div class="row">
-                      
+                        <?php  get_products(); ?>
                     </div>
                 </div>
             </div>

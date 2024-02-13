@@ -166,3 +166,36 @@ function db_connection()
     }
     return $con;
 }
+
+function get_products()
+{
+
+    $con =db_connection();
+
+    $get_brands = "select * from products";
+    $run_brands = mysqli_query($con, $get_brands);
+
+    while ($row_brands = mysqli_fetch_array($run_brands)) {
+        $prd_title = $row_brands["prd_title"];
+        $prd_desc = $row_brands["prd_desc"];
+        $prd_price = $row_brands["prd_price"];
+        $prd_img = $row_brands["prd_img"];
+        $prd_id= $row_brands["prd_id"];
+
+        echo
+        <<<EOT
+            <div class="col-4 mb-3">
+                            <div class="card" style="width: 18rem;">
+                                <img style="width:200px;" src="assets/images/$prd_img" class="card-img-top align-self-center" alt="...">
+                                <div class="card-body d-flex flex-column" style="height: 300px;">
+                                    <h5 class="card-title">$prd_title</h5>
+                                    <p class="card-text">$prd_desc</p>
+                                    <p class="card-text">Price: $prd_price</p>
+                                    <a href="edit_product.php?prd_id=$prd_id" class=" mt-auto align-bottom btn btn-success ">Edit</a>
+                                    <a href="#" class=" mt-auto align-bottom btn btn-danger">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+        EOT;
+    }
+}
