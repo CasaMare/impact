@@ -13,10 +13,8 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/contact.php">Contact us</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/cart.php"><b>Cart</b></a>
-                    </li>
                 </ul>
+                <a class="nav-link text-white" href="/cart.php"><i style="color:#FFF; font-size:30px;" class="bi bi-cart4 me-3"></i></a>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-light btn-outline-success" type="submit">Search</button>
