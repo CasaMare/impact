@@ -1,3 +1,4 @@
+<?php include "assets/functions/functions.php"; ?>
 <header>
     <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container">

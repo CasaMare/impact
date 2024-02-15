@@ -1,3 +1,4 @@
+<?php include $_SERVER["DOCUMENT_ROOT"]."/admin_area/functions/functions.php"; ?>
 <header>
     <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container">

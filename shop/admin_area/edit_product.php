@@ -1,5 +1,5 @@
-<?php include "php/header.php"; ?>
-<?php include "php/nav.php"; ?>
+<?php include $_SERVER["DOCUMENT_ROOT"]."/assets/parts/header.php"; ?>
+<?php include $_SERVER["DOCUMENT_ROOT"]."/admin_area/parts/nav.php"; ?>
 
 <?php
 
@@ -68,4 +68,4 @@ $prd_id = $item[0]["prd_id"];
         </div>
     </div>
 </section>
-<?php include "php/footer.php"; ?>
+<?php include $_SERVER["DOCUMENT_ROOT"]."/assets/parts/footer.php"; ?>
