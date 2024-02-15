@@ -1,5 +1,6 @@
 <?php
 
+include $_SERVER['DOCUMENT_ROOT'].'/assets/functions/db.php';
 
 if(isset($_POST['addProduct'])){
 //    var_dump($_POST); exit();
@@ -10,6 +11,18 @@ if(isset($_POST['addProduct'])){
 if(isset($_POST['editProduct'])){
     editProduct();
 }
+
+if(isset($_POST['addCateg'])){
+    $categ_name = htmlspecialchars($_POST['categ_name']);
+    $id = time();
+    $sql = "INSERT INTO categories values($id,'$categ_name')";
+    if(!db_query($sql,'insert')){
+        echo 'some error hapened';
+    }else{
+        header('Location: ../addcategory.php');
+    }
+}
+
 
 function editProduct()
 {
@@ -129,43 +142,6 @@ function getbrands()
     }
 }
 
-function db_query(string $sql, string $type): array|bool
-{
-    if(!in_array($type,['select','insert','update','delete'])){
-        throw new Exception('Invalid query type');
-    }
-
-    $conn = db_connection();
-
-    $result = mysqli_query($conn, $sql, MYSQLI_USE_RESULT);
-
-    if (!$result) {
-        echo json_encode([
-            "status" => "error",
-            "message" => "Error: " . $sql . "<br>" . $conn->error
-        ]);
-        return false;
-    }
-    if('select' === $type){
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-    return true;
-}
-
-function db_connection()
-{
-    $servername = "db4free.net";
-    $username = "impact";
-    $password = "1cIGrYFGNB";
-    $db="impact";
-
-    $con = mysqli_connect($servername, $username, $password, $db);
-
-    if (!$con) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-    return $con;
-}
 
 function get_products()
 {

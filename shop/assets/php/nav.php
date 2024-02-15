@@ -13,6 +13,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/contact.php">Contact us</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/cart.php"><b>Cart</b></a>
+                    </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

@@ -1,7 +1,57 @@
 <?php
 
+include 'db.php';
 
+if(isset($_POST['addcart'])){
+    addToCart();
+}
 
+function addToCart(){
+    $prd_id = htmlspecialchars($_POST['addcart']);
+    //id, prd_id, cnt
+    $sql = "INSERT INTO cart VALUES(null,$prd_id,1)";
+    if(!db_query($sql,'insert')){
+        header("HTTP/1.1 400 fail");
+        echo 'error';
+    }else{
+        echo 'ok';
+    }
+}
+
+function gen_product_cart()
+{
+
+    $sql = "select * from products where prd_id in (select prd_id from cart)";
+    $run_getitems = db_query($sql,'select');
+
+   // var_dump($run_getitems);
+
+        $aux = 0;
+
+        foreach ($run_getitems as $row_pro) {
+            $product_id = $row_pro["prd_id"];
+            $product_category = $row_pro["prd_cat"];
+            $product_brand = $row_pro["prd_brand"];
+            $product_title = $row_pro["prd_title"];
+            $product_price = $row_pro["prd_price"];
+            $product_image = $row_pro["prd_img"];
+
+       /*     $get_q = "select qty from cart where p_id ='$product_id'";
+            $q_result = mysqli_query($con, $get_q);
+            $q = mysqli_fetch_array($q_result)["qty"];*/
+
+           // $aux = $aux + 1;
+           echo <<<EOT
+           <tr>
+           <th scope="row">1</th>
+           <td>$product_title</td>
+           <td>Otto</td>
+           <td>@mdo</td>
+           </tr>  
+       EOT;
+        }
+    
+}
 
 if(isset($_POST['addContactUs'])){
     addContactUs();
@@ -55,6 +105,7 @@ function get_products()
         $prd_desc = $row_brands["prd_desc"];
         $prd_price = $row_brands["prd_price"];
         $prd_img = $row_brands["prd_img"];
+        $prd_id= $row_brands["prd_id"];
 
         echo
         <<<EOT
@@ -65,7 +116,7 @@ function get_products()
                                     <h5 class="card-title">$prd_title</h5>
                                     <p class="card-text">$prd_desc</p>
                                     <p class="card-text">Price: $prd_price</p>
-                                    <a href="#" class=" mt-auto align-bottom btn btn-primary ">Add to cart</a>
+                                    <a onclick="add_to_cart($prd_id);" href="#" class=" mt-auto align-bottom btn btn-primary ">Add to cart</a>
                                 </div>
                             </div>
                         </div>
@@ -114,54 +165,4 @@ function getbrands()
         </a>
         EOT;
     }
-}
-
-
-
-function db_query(string $sql, string $type): array|bool
-{
-    if(!in_array($type,['select','insert','update','delete'])){
-        throw new Exception('Invalid query type');
-    }
-
-    $conn = db_connection();
-
-    $result = mysqli_query($conn, $sql, MYSQLI_USE_RESULT);
-
-    if (!$result) {
-        echo json_encode([
-            "status" => "error",
-            "message" => "Error: " . $sql . "<br>" . $conn->error
-        ]);
-        return false;
-    }
-    if('select' === $type){
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-    return true;
-}
-
-
-function db_connection()
-{
-    /*
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db="impact_test";*/
-
-    $servername = "db4free.net";
-    $username = "impact";
-    $password = "1cIGrYFGNB";
-    $db="impact";
-
-
-
-    $conn = mysqli_connect($servername, $username, $password, $db);
-
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-
-    return $conn;
 }

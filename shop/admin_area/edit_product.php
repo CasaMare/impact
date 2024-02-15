@@ -2,26 +2,23 @@
 <?php include "php/nav.php"; ?>
 
 <?php
+
 $id  = $_GET['prd_id'];
 
-$con = mysqli_connect("localhost", "root", "", "impact_test");
-
-echo $id;
 $sql = "SELECT * FROM products where prd_id = '$id'";
 
-$run_pro = mysqli_query($con, $sql);
-
-while ($row = mysqli_fetch_array($run_pro)) {
-
-    $prd_title = $row["prd_title"];
-    $prd_brand = $row["prd_brand"];
-    $prd_cat = $row["prd_cat"];
-    $prd_price = $row["prd_price"];
-    $prd_desc = $row["prd_desc"];
-    $prd_keyword = $row["prd_keyword"];
-    $prd_id = $row["prd_id"];
+if(!$item = db_query($sql,'select')){
+    throw new Exception('some error happend');
 }
 
+
+$prd_title = $item[0]["prd_title"];
+$prd_brand = $item[0]["prd_brand"];
+$prd_cat = $item[0]["prd_cat"];
+$prd_price = $item[0]["prd_price"];
+$prd_desc = $item[0]["prd_desc"];
+$prd_keyword = $item[0]["prd_keyword"];
+$prd_id = $item[0]["prd_id"];
 
 ?>
 <section>
@@ -60,7 +57,7 @@ while ($row = mysqli_fetch_array($run_pro)) {
                             </div>
                             <div class="mb-3">
                                 <label for="keywords" class="form-label">Keywords</label>
-                                <input value="<?php $prd_keyword; ?>" required type="text" name="keywords" id="keywords" class="form-control" >
+                                <input value="<?php echo $prd_keyword; ?>" required type="text" name="keywords" id="keywords" class="form-control" >
                             </div>
                             <input value="<?php echo $prd_id; ?>" type="hidden" name="prd_id" >
                             <button id="submit" name="editProduct" type="submit" class="btn btn-primary">Send</button>
