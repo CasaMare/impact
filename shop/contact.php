@@ -1,5 +1,5 @@
-<?php include "assets/php/header.php"; ?>
-<?php include "assets/php/nav.php"; ?>
+<?php include "assets/parts/header.php"; ?>
+<?php include "assets/parts/nav.php"; ?>
     <section>
         <div class="container mt-5">
             <div class="row">
@@ -59,4 +59,4 @@
             </div>
         </div>
     </section>
-<?php include "assets/php/footer.php"; ?>
+    <?php include "assets/parts/footer.php"; ?>

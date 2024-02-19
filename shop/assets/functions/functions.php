@@ -8,49 +8,96 @@ if(isset($_POST['addcart'])){
 
 function addToCart(){
     $prd_id = htmlspecialchars($_POST['addcart']);
-    //id, prd_id, cnt
-    $sql = "INSERT INTO cart VALUES(null,$prd_id,1)";
-    if(!db_query($sql,'insert')){
-        header("HTTP/1.1 400 fail");
-        echo 'error';
+
+    $productInCart = db_query("select cnt from cart where prd_id=$prd_id",'select');
+    if($productInCart){
+        $cnt = $productInCart[0]['cnt'] + 1;
+        db_query("update cart set cnt='$cnt' where prd_id=$prd_id",'update');
     }else{
-        echo 'ok';
+        //id, prd_id, cnt
+        $sql = "INSERT INTO cart VALUES(null,$prd_id,1)";
+        if(!db_query($sql,'insert')){
+            header("HTTP/1.1 400 fail");
+        }else{
+            header("HTTP/1.1 200 success");
+        }
+
     }
+    
 }
 
 function gen_product_cart()
 {
 
-    $sql = "select * from products where prd_id in (select prd_id from cart)";
+    $sql = "select * from cart as `c`
+    inner JOIN products as `pr` on c.prd_id =  `pr`.prd_id;";
+   
     $run_getitems = db_query($sql,'select');
 
-   // var_dump($run_getitems);
+    $iter = 0;
+    $total_amount = 0;
+    $total_items = 0;
 
-        $aux = 0;
+    foreach ($run_getitems as $row_pro) {
+        $item_id = $row_pro["id"];
 
-        foreach ($run_getitems as $row_pro) {
-            $product_id = $row_pro["prd_id"];
-            $product_category = $row_pro["prd_cat"];
-            $product_brand = $row_pro["prd_brand"];
-            $product_title = $row_pro["prd_title"];
-            $product_price = $row_pro["prd_price"];
-            $product_image = $row_pro["prd_img"];
+        $product_id = $row_pro["prd_id"];
+        $product_category = $row_pro["prd_cat"];
+        $product_brand = $row_pro["prd_brand"];
+        $product_title = $row_pro["prd_title"];
+        $product_price = $row_pro["prd_price"];
+        $prd_desc = $row_pro["prd_desc"];
+        $prd_cnt = $row_pro["cnt"];
 
+        $total_items +=  $prd_cnt;
        /*     $get_q = "select qty from cart where p_id ='$product_id'";
             $q_result = mysqli_query($con, $get_q);
             $q = mysqli_fetch_array($q_result)["qty"];*/
+        
+        $iter++;
 
-           // $aux = $aux + 1;
-           echo <<<EOT
+        $total_price = $product_price * $prd_cnt;
+
+        $total_amount += $total_price;
+
+        echo <<<EOT
            <tr>
-           <th scope="row">1</th>
+           <th scope="row">$iter</th>
            <td>$product_title</td>
-           <td>Otto</td>
-           <td>@mdo</td>
+           <td>$prd_desc</td>
+           <td>$product_price</td>
+           <td>$prd_cnt</td>
+           <td>$total_price</td>
+           <td>
+            <a onclick="delete_from_cart($item_id); return false;" href=""><i class="bi bi-x"></i></a>
+           </td>
            </tr>  
        EOT;
-        }
+    }
+
+    echo <<<EOT
+    <tr>
+        <td colspan="3"></td>
+        <td  style="text-align: right;">Total</td>
+        <td >$total_items</td>
+        <td colspan="2">$total_amount</td>
+        
+    </tr>
+EOT;
     
+}
+
+
+if(isset($_POST['deleteItem'])){
+    deleteItemFromCart();
+}
+
+function deleteItemFromCart()
+{
+    $id = $_POST['id'];
+    if(!db_query("DELETE from cart where id=$id",'delete')){
+        header('HTTP/1.1 400 some error happened');
+    }
 }
 
 if(isset($_POST['addContactUs'])){

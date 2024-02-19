@@ -1,12 +1,9 @@
-<?php include "assets/php/header.php"; ?>
-<?php include "assets/php/nav.php"; ?>
+<?php include "assets/parts/header.php"; ?>
+<?php include "assets/parts/nav.php"; ?>
 <section>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-3">
-               
-            </div>
-            <div class="col-9">
+            <div class="col-12">
                 <div class="container">
                     <div class="row">
                         <?php //gen_product_cart(); ?>
@@ -14,13 +11,17 @@
                             <thead>
                                 <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Product name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Cnt</th>
+                                <th scope="col">Total price</th>
+                                <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php gen_product_cart(); ?>
+                                
                             </tbody>
                             </table>
                     </div>
@@ -29,4 +30,4 @@
         </div>
     </div>
 </section>
-<?php include "assets/php/footer.php"; ?>
+<?php include "assets/parts/footer.php"; ?>

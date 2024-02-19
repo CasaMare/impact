@@ -20,6 +20,8 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-light btn-outline-success" type="submit">Search</button>
                 </form>
+                <a class="nav-link text-white" href="/admin_area/auth.php"><i style="color:#FFF; font-size:30px;" class="bi bi-box-arrow-in-right"></i></a>
+                
             </div>
         </div>
     </nav>

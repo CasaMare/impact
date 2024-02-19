@@ -81,3 +81,12 @@ CREATE TABLE cart(
     prd_id int NOT NULL,
     cnt int NOT NULL
 ) COMMENT '';
+
+CREATE TABLE users(  
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Primary Key',
+    email VARCHAR(255),
+    password VARCHAR(255)
+) COMMENT '';
+
+INSERT INTO `users` (id,email,password) VALUES
+(null,'admin@gmail.com','qwerty' );
