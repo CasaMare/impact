@@ -20,6 +20,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="addcategory.php">Add category</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="addbrand.php">Add brand</a>
+                    </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

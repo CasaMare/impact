@@ -23,6 +23,17 @@ if(isset($_POST['addCateg'])){
     }
 }
 
+if(isset($_POST['addBrand'])){
+    $brand_name = htmlspecialchars($_POST['brand_name']);
+    $id = time();
+    $sql = "INSERT INTO brands values($id,'$brand_name')";
+    if(!db_query($sql,'insert')){
+        echo 'some error hapened';
+    }else{
+        header('Location: ../addbrand.php');
+    }
+}
+
 
 function editProduct()
 {
