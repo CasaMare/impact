@@ -28,7 +28,11 @@ function addToCart(){
 
 function gen_product_cart()
 {
+/* cart.id , cart.prd_id, cart.price */
+/* products.prd_id, products.name */
 
+
+/* cart.id, cart.price , products.name */
     $sql = "select * from cart as `c`
     inner JOIN products as `pr` on c.prd_id =  `pr`.prd_id;";
    
@@ -156,7 +160,7 @@ function get_products()
 
         echo
         <<<EOT
-            <div class="col-4 mb-3">
+            <div class="col-4 mb-3 product-item">
                             <div class="card" style="width: 18rem;">
                                 <img style="width:200px;" src="assets/images/$prd_img" class="card-img-top align-self-center" alt="...">
                                 <div class="card-body d-flex flex-column" style="height: 300px;">

@@ -13,17 +13,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input required type="email" class="form-control" id="email" value="<?php 
-                        if(isset($_GET['email'])){
-                            echo $_GET['email'];
-                        }
-                        ?>">
+                        <input required type="email" class="form-control" id="email" >
                         </div>
                         <div class="mb-3">
                         <label for="password" class="form-label">password</label>
                         <input required type="password" class="form-control" id="password" >   
                     </div>
-                    <button onclick="auth();" type="submit" class="btn btn-primary">Auth</button>
+                    <button onclick="register();" type="submit" class="btn btn-primary">Register</button>
                     </div>
                 </div>
             </div>
@@ -31,7 +27,7 @@
     </div>
 </section>
 <script>
-    function auth()
+    function register()
     {
         $('#error').hide();
 
@@ -39,14 +35,15 @@
         var password = $('#password').val();
         
         $.ajax({
-        url: "functions/auth.php",
+        url: "functions/register.php",
         type:"POST",
         data: {
             email: email,
             password: password
         },
         success: function(response){
-            window.location.href = "admin.php";
+           // alert('success');
+            window.location.href = "auth.php?email="+email;
         },
         error: function(response){
             $('#error').html(response.statusText);

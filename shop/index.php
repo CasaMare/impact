@@ -16,7 +16,7 @@
             </div>
             <div class="col-9">
                 <div class="container">
-                    <div class="row">
+                    <div class="row" id="products">
                         <?php get_products();?>
                     </div>
                 </div>
